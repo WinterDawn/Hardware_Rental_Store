@@ -1,6 +1,3 @@
-class Rental:
-    pass
-
 class Store:
     def __init__(self, Name):
         self.name = Name

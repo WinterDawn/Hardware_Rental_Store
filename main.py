@@ -20,15 +20,15 @@ def main():
 
     for i in range(20):
         if i<4:
-            store.addTools(Painting("Painting tool"+str(i),10))
+            store.addTools(Painting("Painting_tool_"+str(i),10))
         elif i<8:
-            store.addTools(Concrete("Concrete tool"+str(i),20))
+            store.addTools(Concrete("Concrete_tool_"+str(i),20))
         elif i<12:
-            store.addTools(Plumbing("Plumbing tool"+str(i),35))
+            store.addTools(Plumbing("Plumbing_tool_"+str(i),35))
         elif i<16:
-            store.addTools(Woodwork("Woodwork tool"+str(i),55))
+            store.addTools(Woodwork("Woodwork_tool_"+str(i),55))
         else:
-            store.addTools(Yardwork("Yardwork tool"+str(i),100))
+            store.addTools(Yardwork("Yardwork_tool_"+str(i),100))
 
     for i in range(34):
         #return tools before the store opens
@@ -98,10 +98,20 @@ def main():
                 break
 
     rental = store.get_rental()
+    print("Total rental:")
     for re in rental:
         print(re["customer"].get_name(),"rent",re["tool"].get_name(),"for",re["nights"], "nights in total",re["price"], "dollars.")
     print("Total income in 35 days:")
     print(store.get_income(),"dollars")
+    print(store.num_tools(),"tools remaing in store:")
+    for t in store.get_tools():
+        print(t.get_name())
+
+    print("Active rental:")
+    for re in rental:
+        if re["active"]:
+            print(re["customer"].get_name(),"rent",re["tool"].get_name(),"for",re["nights"], "nights in total",re["price"], "dollars.")
+    
 
 
 
