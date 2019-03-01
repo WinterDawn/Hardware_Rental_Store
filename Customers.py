@@ -58,7 +58,7 @@ class Business(Customer):
 
 class Regular(Customer):
     def rent(self, tools, days):
-        if (len(tools)>0 and len(too)<=3 and 
+        if (len(tools)>0 and len(tools)<=3 and 
             days >= 3 and days <= 5):
             for t in tools:
                 self.rental[t] = days 
