@@ -1,19 +1,19 @@
-from abc import ABC,abstractmethod;
+from abc import ABC, abstractmethod;
 
 class Customer(ABC):
-	def __init__(self,name):
-		self.name = name
-		self.rental = {}
+    def __init__(self, name):
+        self.name = name
+        self.rental = {}
 
-	def get_name(self，name):
-		return self.name
+    def get_name(self):
+        return self.name
 
     @abstractmethod
-	def rent(self, tool, days):
+    def rent(self, tool, days):
         pass
 
-	def get_rental(self):
-		return self.rental
+    def get_rental(self):
+        return self.rental
 
     def get_returns(self):
         return_tools = []
@@ -23,12 +23,12 @@ class Customer(ABC):
                 return_tools.append(t)
         return return_tools
 
-	def give_back(self,tool):
-		self.rental.pop(tool)
+    def give_back(self,tool):
+        self.rental.pop(tool)
 
-	@abstractmethod
-	def get_type(self):
-		pass
+    @abstractmethod
+    def get_type(self):
+        pass
 
 
 class Casual(Customer):
@@ -41,8 +41,8 @@ class Casual(Customer):
         else:
             return False
 
-	def get_type(self):
-		return "Casual"
+    def get_type(self):
+        return "Casual"
 
 class Business(Customer):
     def rent(self, tools, days):
@@ -53,8 +53,8 @@ class Business(Customer):
         else:
             return False
 
-	def get_type(self):
-		return "Business"
+    def get_type(self):
+        return "Business"
 
 class Regular(Customer):
     def rent(self, tools, days):
@@ -66,5 +66,5 @@ class Regular(Customer):
         else:
             return False
 
-	def get_type(self):
-		return "Regular"
+    def get_type(self):
+        return "Regular"
