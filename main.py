@@ -1,9 +1,11 @@
 import Customers
 import Store
-import Tools
+from Tools import Tool, Painting, Concrete, Plumbing, Woodwork, Yardwork
 
 def main():
-    print("hello")
+    tool = Painting("aaa",123)
+    print(tool.get_type())
+
 
 if __name__ == '__main__':
     main()

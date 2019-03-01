@@ -1,4 +1,5 @@
-class Tool(object):
+from abc import ABC, abstractmethod
+class Tool(ABC):
     def __init__(self, name, price):
         self.name = name
         self.price = price
@@ -13,19 +14,34 @@ class Tool(object):
     def is_rent(self):
         return self.status
 
+    def rent(self):
+        self.status = True
+
+    def give_back(self):
+        self.status = False
+
+    @abstractmethod
+    def get_type(self):
+        pass
+
 
 
 class Painting(Tool):
-    pass
+    def get_type(self):
+        return "Painting"
 
 class Concrete(Tool):
-    pass
+    def get_type(self):
+        return "Concrete"
 
 class Plumbing(Tool):
-    pass
+    def get_type(self):
+        return "Plumbing"
 
 class Woodwork(Tool):
-    pass
+    def get_type(self):
+        return "Woodwork"
 
 class Yardwork(Tool):
-    pass
+    def get_type(self):
+        return "Yardwork"
