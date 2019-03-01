@@ -3,31 +3,34 @@ from abc import ABC,abstractmethod;
 class Customer(ABC):
 
 
-	def __init__(self,name,does_rent,rent_time):
-		self.name=name
-		self.does_rent=does_rent
-		self.rent_time=rent_time
+	def __init__(self,name):
+		self.name = name
+		self.rental = {}
 
 	def get_name(self，name):
 		return self.name
 
-	def get_does_rent(self,does_rent):
-		return self.does_rent
+	def rent(self, tool, days):
+		self.rental[tool] = days
 
-	def get_rent_time(self,rent_time):
-		return self.rent_time
+	def get_rental(self):
+		return self.rental
 
-	def rent(self,does_rent):
-		does_rent= True
-	def returned(self,does_rent):
-		does_rent= False
+	def give_back(self,tool):
+		self.rental.pop(tool)
+
+	@abstractmethod
+	def get_type(self):
+		pass
 
 
 
 class Casual(Customer):
 	pass
+
 class Business(Customer):
 	pass
+
 class Regular(Customer):
 	pass
 
