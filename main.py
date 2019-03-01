@@ -1,5 +1,5 @@
 from Customers import Casual, Business, Regular
-import Store
+#from Store import Store
 from Tools import Tool, Painting, Concrete, Plumbing, Woodwork, Yardwork
 
 def main():
