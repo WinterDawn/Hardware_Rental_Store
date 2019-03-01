@@ -17,7 +17,7 @@ class Tool(ABC):
     def rent(self):
         self.status = True
 
-    def give_back(self):
+    def returned(self):
         self.status = False
 
     @abstractmethod
