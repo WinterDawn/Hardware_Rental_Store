@@ -1,4 +1,4 @@
-import Customers
+from Customers import Casual, Business, Regular
 import Store
 from Tools import Tool, Painting, Concrete, Plumbing, Woodwork, Yardwork
 
