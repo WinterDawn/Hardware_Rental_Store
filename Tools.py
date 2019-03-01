@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 class Tool(ABC):
     def __init__(self, name, price):
         self.name = name

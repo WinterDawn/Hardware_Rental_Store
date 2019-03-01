@@ -1,8 +1,6 @@
 from abc import ABC,abstractmethod;
 
 class Customer(ABC):
-
-
 	def __init__(self,name):
 		self.name = name
 		self.rental = {}
@@ -10,16 +8,20 @@ class Customer(ABC):
 	def get_name(self，name):
 		return self.name
 
+    @abstractmethod
 	def rent(self, tool, days):
-		if days <= 7 and len(self.rental) <3:
-			self.rental[tool] = days
-			return True
-		else:
-			return False
-
+        pass
 
 	def get_rental(self):
 		return self.rental
+
+    def get_returns(self):
+        return_tools = []
+        for t in self.rental: 
+            self.rental[t] -= 1
+            if self.rental[t] == 0:
+                return_tools.append(t)
+        return return_tools
 
 	def give_back(self,tool):
 		self.rental.pop(tool)
@@ -29,13 +31,40 @@ class Customer(ABC):
 		pass
 
 
-
 class Casual(Customer):
-	pass
+    def rent(self, tools, days):
+        if (len(tools)>0 and len(tools)<3 and 
+            days > 0 and days <3):
+            for t in tools:
+                self.rental[t] = days 
+            return True
+        else:
+            return False
+
+	def get_type(self):
+		return "Casual"
 
 class Business(Customer):
-	pass
+    def rent(self, tools, days):
+        if (len(tools)==3 and days == 7):
+            for t in tools:
+                self.rental[t] = days 
+            return True
+        else:
+            return False
+
+	def get_type(self):
+		return "Business"
 
 class Regular(Customer):
-	pass
+    def rent(self, tools, days):
+        if (len(tools)>0 and len(too)<=3 and 
+            days >= 3 and days <= 5):
+            for t in tools:
+                self.rental[t] = days 
+            return True
+        else:
+            return False
 
+	def get_type(self):
+		return "Regular"
