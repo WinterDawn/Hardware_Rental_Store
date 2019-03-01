@@ -23,7 +23,7 @@ class Customer(ABC):
                 return_tools.append(t)
         return return_tools
 
-    def give_back(self,tool):
+    def return_tool(self,tool):
         self.rental.pop(tool)
 
     @abstractmethod
