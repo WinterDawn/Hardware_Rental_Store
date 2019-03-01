@@ -2,29 +2,29 @@ from abc import ABC, abstractmethod;
 
 class Customer(ABC):
     def __init__(self, name):
-        self.name = name
-        self.rental = {}
+        self._name = name
+        self._rental = {}
 
     def get_name(self):
-        return self.name
+        return self._name
 
     @abstractmethod
     def rent(self, tool, days):
         pass
 
     def get_rental(self):
-        return self.rental
+        return self._rental
 
     def get_returns(self):
         return_tools = []
-        for t in self.rental: 
-            self.rental[t] -= 1
-            if self.rental[t] == 0:
+        for t in self._rental: 
+            self._rental[t] -= 1
+            if self._rental[t] == 0:
                 return_tools.append(t)
         return return_tools
 
     def return_tool(self,tool):
-        self.rental.pop(tool)
+        self._rental.pop(tool)
 
     @abstractmethod
     def get_type(self):
@@ -36,7 +36,7 @@ class Casual(Customer):
         if (len(tools)>0 and len(tools)<3 and 
             days > 0 and days <3):
             for t in tools:
-                self.rental[t] = days 
+                self._rental[t] = days 
             return True
         else:
             return False
@@ -48,7 +48,7 @@ class Business(Customer):
     def rent(self, tools, days):
         if (len(tools)==3 and days == 7):
             for t in tools:
-                self.rental[t] = days 
+                self._rental[t] = days 
             return True
         else:
             return False
@@ -61,7 +61,7 @@ class Regular(Customer):
         if (len(tools)>0 and len(tools)<=3 and 
             days >= 3 and days <= 5):
             for t in tools:
-                self.rental[t] = days 
+                self._rental[t] = days 
             return True
         else:
             return False

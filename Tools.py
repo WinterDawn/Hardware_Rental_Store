@@ -2,24 +2,24 @@ from abc import ABC, abstractmethod
 
 class Tool(ABC):
     def __init__(self, name, price):
-        self.name = name
-        self.price = price
-        self.status = False
+        self._name = name
+        self._price = price
+        self._status = False
 
     def get_name(self):
-        return self.name
+        return self._name
 
     def get_price(self):
-        return self.price
+        return self._price
 
     def is_rent(self):
-        return self.status
+        return self._status
 
     def rent(self):
-        self.status = True
+        self._status = True
 
     def returned(self):
-        self.status = False
+        self._status = False
 
     @abstractmethod
     def get_type(self):

@@ -1,49 +1,48 @@
 class Store:
     def __init__(self, Name):
-        self.name = Name
-        self.Tools = []
-        self.rental = []
-        self.income = 0
+        self.__name = Name
+        self._Tools = []
+        self._rental = []
+        self._income = 0
 
-    def isempty(self):
-        if len(self.Tools)==0:
+    def get_name(self):
+        return self.__name
+
+    def is_empty(self):
+        if len(self._Tools)==0:
             return True
         else:
             return False
 
     def addTools(self, tool):
-        self.Tools.append(tool)
+        self._Tools.append(tool)
 
-    def removeTools(self, tool):
-        self.Tools.remove(tool)
+    def __removeTools(self, tool):
+        self._Tools.remove(tool)
 
     def num_tools(self):
-        return len(self.Tools)
+        return len(self._Tools)
 
     def get_tools(self):
-        return self.Tools
+        return self._Tools
 
     def get_rental(self):
-        return self.rental
+        return self._rental
     
     def get_income(self):
-        return self.income
-
-    # def initialrental(self):
-    #     for i in range(10):
-    #         self.rental[i] = []
+        return self._income
 
     def rent(self, customer, tool, days):
         payment = tool.get_price()*days
-        self.income = self.income + payment
+        self._income = self._income + payment
         record = {"customer":customer,"tool":tool,"nights": days,"price": payment, "active": True}
-        self.rental.append(record)
-        self.removeTools(tool)
+        self._rental.append(record)
+        self.__removeTools(tool)
         
 
     def give_back(self, customer, tool):
         self.addTools(tool)
-        for r in self.rental:
+        for r in self._rental:
             if (r["customer"] == customer and
                 r["tool"] == tool and
                 r["active"]):

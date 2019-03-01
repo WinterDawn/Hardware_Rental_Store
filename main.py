@@ -49,7 +49,7 @@ def main():
         cus = choices(candidates, k = randint(0,len(candidates)))
         # available_tools = store.get_tools()
         for c in cus:
-            if not store.isempty():
+            if not store.is_empty():
                 if isinstance(c, Business) and store.num_tools()>=3:
                     rent_tools = sample(store.get_tools(),k=3)
                     c.rent(rent_tools,7)
