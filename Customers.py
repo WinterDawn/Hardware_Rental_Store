@@ -11,7 +11,12 @@ class Customer(ABC):
 		return self.name
 
 	def rent(self, tool, days):
-		self.rental[tool] = days
+		if days <= 7 and len(self.rental) <3:
+			self.rental[tool] = days
+			return True
+		else:
+			return False
+
 
 	def get_rental(self):
 		return self.rental
