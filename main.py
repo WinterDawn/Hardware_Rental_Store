@@ -48,54 +48,24 @@ def main():
         
         cus = choices(candidates, k = randint(0,len(candidates)))
         # available_tools = store.get_tools()
+        count = 0
         for c in cus:
             if not store.is_empty():
                 if isinstance(c, Business) and store.num_tools()>=3:
-                    rent_tools = sample(store.get_tools(),k=3)
-                    c.rent(rent_tools,7)
-                    for rt in rent_tools:
-                        rt.rent()
-                        store.rent(c,rt,7)
+                    c.make_rent(store)
+                    count+=1
                         
                 if isinstance(c, Regular):
-                    if store.num_tools() >= 3:
-                        rent_tools = sample(store.get_tools(),k=randint(1,3))
-                        nights = randint(3,5)
-                        c.rent(rent_tools,nights)
-                        for rt in rent_tools:
-                            rt.rent()
-                            store.rent(c,rt,nights)
-                    elif store.num_tools() ==2 :
-                        rent_tools = sample(store.get_tools(),k=randint(1,2))
-                        nights = randint(3,5)
-                        c.rent(rent_tools,nights)
-                        for rt in rent_tools:
-                            rt.rent()
-                            store.rent(c,rt,nights)
-                    else:
-                        rent_tools = store.get_tools()
-                        nights = randint(3,5)
-                        c.rent(rent_tools,nights)
-                        rent_tools[0].rent()
-                        store.rent(c,rent_tools[0],nights)
+                    c.make_rent(store)
+                    count+=1
 
                 if isinstance(c, Casual):
-                    if store.num_tools() > 1:
-                        rent_tools = sample(store.get_tools(),k=randint(1,2))
-                        nights = randint(1,2)
-                        c.rent(rent_tools,nights)
-                        for rt in rent_tools:
-                            rt.rent()
-                            store.rent(c,rt,nights)
-                    else:
-                        rent_tools = store.get_tools()
-                        nights = randint(1,2)
-                        c.rent(rent_tools,nights)
-                        rent_tools[0].rent()
-                        store.rent(c,rent_tools[0],nights)
+                    c.make_rent(store)
+                    count+=1
 
             else:
                 break
+        print(count,"customers enter store today")
 
     rental = store.get_rental()
     print("Total rental:")

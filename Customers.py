@@ -1,4 +1,5 @@
-from abc import ABC, abstractmethod;
+from abc import ABC, abstractmethod
+from random import randint, choices, sample
 
 class Customer(ABC):
     def __init__(self, name):
@@ -7,10 +8,6 @@ class Customer(ABC):
 
     def get_name(self):
         return self._name
-
-    @abstractmethod
-    def rent(self, tool, days):
-        pass
 
     def get_rental(self):
         return self._rental
@@ -30,6 +27,14 @@ class Customer(ABC):
     def get_type(self):
         pass
 
+    @abstractmethod
+    def rent(self, tool, days):
+        pass
+
+    @abstractmethod
+    def make_rent(self,store):
+        pass
+
 
 class Casual(Customer):
     def rent(self, tools, days):
@@ -40,6 +45,21 @@ class Casual(Customer):
             return True
         else:
             return False
+
+    def make_rent(self,store):
+        if store.num_tools() > 1:
+            rent_tools = sample(store.get_tools(),k=randint(1,2))
+            nights = randint(1,2)
+            self.rent(rent_tools,nights)
+            for rt in rent_tools:
+                rt.rent()
+                store.rent(self,rt,nights)
+        else:
+            rent_tools = store.get_tools()
+            nights = randint(1,2)
+            self.rent(rent_tools,nights)
+            rent_tools[0].rent()
+            store.rent(self,rent_tools[0],nights)
 
     def get_type(self):
         return "Casual"
@@ -53,6 +73,13 @@ class Business(Customer):
         else:
             return False
 
+    def make_rent(self,store):
+        rent_tools = sample(store.get_tools(),k=3)
+        self.rent(rent_tools,7)
+        for rt in rent_tools:
+            rt.rent()
+            store.rent(self,rt,7)
+
     def get_type(self):
         return "Business"
 
@@ -65,6 +92,28 @@ class Regular(Customer):
             return True
         else:
             return False
+
+    def make_rent(self,store):
+        if store.num_tools() >= 3:
+            rent_tools = sample(store.get_tools(),k=randint(1,3))
+            nights = randint(3,5)
+            self.rent(rent_tools,nights)
+            for rt in rent_tools:
+                rt.rent()
+                store.rent(self,rt,nights)
+        elif store.num_tools() ==2 :
+            rent_tools = sample(store.get_tools(),k=randint(1,2))
+            nights = randint(3,5)
+            self.rent(rent_tools,nights)
+            for rt in rent_tools:
+                rt.rent()
+                store.rent(self,rt,nights)
+        else:
+            rent_tools = store.get_tools()
+            nights = randint(3,5)
+            self.rent(rent_tools,nights)
+            rent_tools[0].rent()
+            store.rent(self,rent_tools[0],nights)
 
     def get_type(self):
         return "Regular"
