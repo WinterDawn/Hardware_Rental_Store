@@ -55,11 +55,7 @@ def main():
                     c.make_rent(store)
                     count+=1
                         
-                if isinstance(c, Regular):
-                    c.make_rent(store)
-                    count+=1
-
-                if isinstance(c, Casual):
+                if not isinstance(c, Business):
                     c.make_rent(store)
                     count+=1
 
@@ -82,8 +78,6 @@ def main():
         if re["active"]:
             print(re["customer"].get_name(),"rent",re["tool"].get_name(),"for",re["nights"], "nights in total",re["price"], "dollars.")
     
-
-
 
 if __name__ == '__main__':
     main()
