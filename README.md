@@ -10,7 +10,7 @@ python 3.7
 
 ### Running 
 ```
-python main.py
+python3 main.py
 ```
 
 ### Authors 
